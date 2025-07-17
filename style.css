@@ -291,6 +291,12 @@ footer .bi {
   border-radius: 5px;
 }
 
+.nav-link.active {
+  color: #fff !important;
+  background-color: #007bff !important;
+  border-radius: 5px;
+}
+
 /* =====================
    Achievements Timeline Styles
 ====================== */
