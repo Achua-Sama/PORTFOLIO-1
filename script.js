@@ -159,23 +159,24 @@ sendBtn.addEventListener('click', () => {
 const toggleThemeButton = document.getElementById('toggleTheme');
 const themeIcon = document.querySelector('.theme-icon');
 
-// Check for saved theme in localStorage
+// Ensure proper initialization of theme on page load
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
   document.body.setAttribute('data-bs-theme', savedTheme);
   themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+} else {
+  document.body.setAttribute('data-bs-theme', 'light');
 }
 
-// Toggle theme on button click
+// Add event listener for dark mode toggle
 toggleThemeButton.addEventListener('click', () => {
   console.log('Dark mode button clicked');
   const currentTheme = document.body.getAttribute('data-bs-theme');
-  console.log('Current theme:', currentTheme);
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
   document.body.setAttribute('data-bs-theme', newTheme);
-  console.log('New theme set:', newTheme);
   themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
   localStorage.setItem('theme', newTheme);
+  console.log(`Theme changed to: ${newTheme}`);
 });
 
 // Chatbot functionality
