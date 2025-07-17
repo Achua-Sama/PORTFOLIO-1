@@ -168,9 +168,12 @@ if (savedTheme) {
 
 // Toggle theme on button click
 toggleThemeButton.addEventListener('click', () => {
+  console.log('Dark mode button clicked');
   const currentTheme = document.body.getAttribute('data-bs-theme');
+  console.log('Current theme:', currentTheme);
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
   document.body.setAttribute('data-bs-theme', newTheme);
+  console.log('New theme set:', newTheme);
   themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
   localStorage.setItem('theme', newTheme);
 });
