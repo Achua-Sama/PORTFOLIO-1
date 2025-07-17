@@ -236,6 +236,25 @@ window.addEventListener('click', (event) => {
   });
 });
 
+// Navigation and Contact Form
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const contactForm = document.querySelector('form');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      navLinks.forEach((nav) => nav.classList.remove('active'));
+      event.target.classList.add('active');
+    });
+  });
+
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent default form submission
+    contactForm.reset(); // Clear the form fields
+    alert('Message sent successfully!'); // Optional: Notify the user
+  });
+});
+
 console.log('Dark mode toggle button:', toggleThemeButton);
 console.log('Chatbot toggle button:', chatbotToggle);
 console.log('Chatbot body:', chatbotBody);
