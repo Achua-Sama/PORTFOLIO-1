@@ -91,7 +91,6 @@ input:focus, textarea:focus {
   overflow: hidden;
   z-index: 9999;
   font-size: 14px;
-  transition: all 0.3s ease;
 }
 
 .chatbot-header {
@@ -307,6 +306,7 @@ footer .bi {
 }
 
 .navbar-nav .nav-link {
+  color: inherit;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
