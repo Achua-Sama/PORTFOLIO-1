@@ -7,6 +7,7 @@ body {
   background-color: #fff;
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 70px; /* Adjust based on the navbar height */
 }
 
 h1, h2, h3, h4, h5 {
@@ -130,6 +131,7 @@ main {
 
 footer {
   margin-top: auto;
+  width: 100%;
 }
 footer {
   background-color:  hsl(263, 87%, 22%);
@@ -297,6 +299,13 @@ footer .bi {
 /* =====================
    Navbar Styles
 ====================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030; /* Ensure it stays above other elements */
+}
+
 .navbar-nav .nav-link {
   transition: color 0.3s ease, background-color 0.3s ease;
 }
