@@ -116,22 +116,95 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Theme Toggle
-const toggleTheme = document.getElementById('toggleTheme');
+// Debugging logs for chatbot functionality
+console.log('Chatbot script loaded');
 
-// Check for saved theme preference or default to 'light'
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.body.setAttribute('data-bs-theme', savedTheme);
+// Check if chatbot elements exist
+if (chatbot) {
+  console.log('Chatbot element found:', chatbot);
+} else {
+  console.error('Chatbot element not found');
+}
 
-toggleTheme.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-bs-theme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-   
-    // Set the new theme
-    document.body.setAttribute('data-bs-theme', newTheme);
-    
-    // Save to localStorage
-    localStorage.setItem('theme', newTheme);
+if (chatbotBody) {
+  console.log('Chatbot body element found:', chatbotBody);
+} else {
+  console.error('Chatbot body element not found');
+}
+
+if (chatbotHeader) {
+  console.log('Chatbot header element found:', chatbotHeader);
+} else {
+  console.error('Chatbot header element not found');
+}
+
+// Log event listener attachment
+chatbotHeader.addEventListener('click', () => {
+  console.log('Chatbot header clicked');
+  chatbot.classList.toggle('active');
+});
+
+// Log user input and responses
+sendBtn.addEventListener('click', () => {
+  console.log('Send button clicked');
+  const question = userInput.value.trim();
+  console.log('User input:', question);
+  if (question) {
+    const response = getBotResponse(question);
+    console.log('Bot response:', response);
+  }
+});
+
+// Dark Mode Toggle Script
+const toggleThemeButton = document.getElementById('toggleTheme');
+const themeIcon = document.querySelector('.theme-icon');
+
+// Check for saved theme in localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.body.setAttribute('data-bs-theme', savedTheme);
+  themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Toggle theme on button click
+toggleThemeButton.addEventListener('click', () => {
+  const currentTheme = document.body.getAttribute('data-bs-theme');
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  document.body.setAttribute('data-bs-theme', newTheme);
+  themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', newTheme);
+});
+
+// Chatbot functionality
+const chatbotToggle = document.querySelector('.chatbot-toggle');
+const chatbotBody = document.querySelector('.chatbot-body');
+
+chatbotToggle.addEventListener('click', () => {
+  chatbotBody.classList.toggle('d-none');
+});
+
+chatbotBody.innerHTML = `
+  <div class="p-3">
+    <p><strong>Chatbot:</strong> Hi! How can I assist you today?</p>
+    <div class="input-group mt-3">
+      <input type="text" id="chatInput" class="form-control" placeholder="Type your question...">
+      <button id="sendBtn" class="btn btn-primary">Send</button>
+    </div>
+    <div id="chatOutput" class="mt-3"></div>
+  </div>
+`;
+
+const sendBtn = document.getElementById('sendBtn');
+const chatInput = document.getElementById('chatInput');
+const chatOutput = document.getElementById('chatOutput');
+
+sendBtn.addEventListener('click', () => {
+  const userInput = chatInput.value.trim();
+  if (userInput) {
+    chatOutput.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+    chatOutput.innerHTML += `<p><strong>Chatbot:</strong> I'm here to help, but my responses are limited for now. Please ask something else!</p>`;
+    chatInput.value = '';
+  }
 });
 
 // Modal Functions
@@ -148,4 +221,18 @@ function closeModal(id) {
         modal.style.display = "none";
     }
 }
+
+// Close modal when clicking outside of it
+window.addEventListener('click', (event) => {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach((modal) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+
+console.log('Dark mode toggle button:', toggleThemeButton);
+console.log('Chatbot toggle button:', chatbotToggle);
+console.log('Chatbot body:', chatbotBody);
 
