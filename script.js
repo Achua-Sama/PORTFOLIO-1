@@ -155,28 +155,29 @@ sendBtn.addEventListener('click', () => {
   }
 });
 
-// Dark Mode Toggle Script
+// Dark Mode Toggle using Bootstrap's JavaScript utilities
 const toggleThemeButton = document.getElementById('toggleTheme');
 const themeIcon = document.querySelector('.theme-icon');
 
-// Ensure proper initialization of theme on page load
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  document.body.setAttribute('data-bs-theme', savedTheme);
-  themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-} else {
-  document.body.setAttribute('data-bs-theme', 'light');
-}
+// Initialize theme on page load
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.body.setAttribute('data-bs-theme', savedTheme);
+themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-// Add event listener for dark mode toggle
+// Toggle theme on button click
 toggleThemeButton.addEventListener('click', () => {
-  console.log('Dark mode button clicked');
   const currentTheme = document.body.getAttribute('data-bs-theme');
+  console.log('Current theme:', currentTheme);
+
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
   document.body.setAttribute('data-bs-theme', newTheme);
+  console.log('New theme set:', newTheme);
+
   themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  console.log('Theme icon updated to:', themeIcon.textContent);
+
   localStorage.setItem('theme', newTheme);
-  console.log(`Theme changed to: ${newTheme}`);
+  console.log('Theme saved to localStorage:', newTheme);
 });
 
 // Chatbot functionality
@@ -254,8 +255,4 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Message sent successfully!'); // Optional: Notify the user
   });
 });
-
-console.log('Dark mode toggle button:', toggleThemeButton);
-console.log('Chatbot toggle button:', chatbotToggle);
-console.log('Chatbot body:', chatbotBody);
 
